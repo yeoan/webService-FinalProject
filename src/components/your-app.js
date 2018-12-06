@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {yourAction} from '../actions/yourActions.js';
-import YourComponent1 from './your-component.js'
-import YourComponent2 from './your-component2.js'
+import Router from './router.js'
 import { BrowserRouter, Route} from 'react-router-dom'; //{Link} to shift page;
 
 class YourComponent extends React.Component {
@@ -13,12 +12,9 @@ class YourComponent extends React.Component {
 
   render() {
     return (
-      <BrowserRouter>
-        <div>
-          <Route path="/" component={YourComponent1} exact/>
-          <Route path="/c2" component={YourComponent2} />
-        </div>
-      </BrowserRouter>
+      <div>
+        <Router />
+      </div>
     );
   }
 }

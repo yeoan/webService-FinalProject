@@ -7,7 +7,7 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path:path.join(__dirname,'/dist'),
-    filename: '[name].[contenthash].js',
+    filename: '[name].[hash].js',
   },
   module: {
     rules: [
@@ -17,6 +17,10 @@ module.exports = {
         use: {
           loader: "babel-loader"
         }
+      },
+      {
+        test: /\.css$/,
+        use: [ 'style-loader', 'css-loader' ]
       }
     ]
   },
