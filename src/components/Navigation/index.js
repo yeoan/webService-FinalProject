@@ -13,10 +13,14 @@ class Navigation extends React.Component {
 
   render() {
     return (
+      <div id="navigation">
       <nav class="navbar navbar-default navbar-static-top" role="navigation" style={{marginBottom: 0}}>
         <Navbar />
         <Sidebar />
       </nav>
+      </div>
+
+
     );
   }
 }

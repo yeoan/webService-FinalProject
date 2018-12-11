@@ -190,7 +190,10 @@ class CaliforniaMap extends React.Component {
 
   render() {
     return (
-      <div>
+
+      <div id="page-wrapper">
+          <div class="container-fluid">
+              <div class="row">
       <div class="col-lg-12">
           <h1 class="page-header">Weather</h1>
       </div>
@@ -205,6 +208,8 @@ class CaliforniaMap extends React.Component {
       </div>
       <div class="col-lg-6">
       <div id="chart-container-rain"></div>
+      </div>
+      </div>
       </div>
       </div>
     );
