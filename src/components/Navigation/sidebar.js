@@ -27,9 +27,6 @@ class Sidebar extends React.Component {
                               <Link to="/allactivities">All activities</Link>
                           </li>
                           <li>
-                              <a href="flot.html">My activities</a>
-                          </li>
-                          <li>
                               <a href="morris.html">Friend's activities</a>
                           </li>
                       </ul>
@@ -39,7 +36,7 @@ class Sidebar extends React.Component {
                       <a href="tables.html"><i class="fa fa-table fa-fw"></i> Friends</a>
                   </li>
                   <li>
-                      <a href="tables.html"><i class="fa fa-table fa-fw"></i> Calender</a>
+                      <Link to="/calendar"><i class="fa fa-table fa-fw"></i> Calender</Link>
                   </li>
               </ul>
           </div>

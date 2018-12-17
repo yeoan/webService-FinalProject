@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {yourAction} from '../../actions/yourActions.js';
 
 class Allactivities extends React.Component {
-
+  
   constructor(props) {
     super(props);
   }
@@ -25,7 +25,7 @@ class Allactivities extends React.Component {
                       <img src={'../src/images/'+item+'.jpg'} style={{width:'100%',height:'200px'}}/>
                         <div class="cardcontainer">
                           <h4><b>{item}</b></h4>
-                          <p>Architect & Engineer</p>
+                          <p>Hope you will like it!</p>
                         </div>
                       </div>
                     </div>

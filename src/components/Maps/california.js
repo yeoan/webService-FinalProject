@@ -11,7 +11,8 @@ class CaliforniaMap extends React.Component {
     var temps = [];
     var wind = [];
     var rain = [];
-    axios.get('../../../california.json')
+    //./california.json in nginx
+    axios.get('./california.json')
   .then(function (response) {
     response.data.list.map((item)=>{
       clouds.push({
@@ -49,7 +50,6 @@ class CaliforniaMap extends React.Component {
 
   componentDidMount(){
     var thisClass = this;
-
   }
 
   renderCloudsCharts(clouds){
@@ -180,17 +180,21 @@ class CaliforniaMap extends React.Component {
   });
   }
 
+  recommendActivities(){
+      this.props.history.push('/recommedActivity');
+  }
+
   constructor(props) {
     super(props);
     this.renderCloudsCharts = this.renderCloudsCharts.bind(this);
     this.renderTempsCharts = this.renderTempsCharts.bind(this);
     this.renderWindCharts = this.renderWindCharts.bind(this);
     this.renderRainCharts = this.renderRainCharts.bind(this);
+    this.recommendActivities = this.recommendActivities.bind(this);
   }
 
   render() {
     return (
-
       <div id="page-wrapper">
           <div class="container-fluid">
               <div class="row">
@@ -209,6 +213,7 @@ class CaliforniaMap extends React.Component {
       <div class="col-lg-6">
       <div id="chart-container-rain"></div>
       </div>
+      <button type="button" class="btn btn-primary btn-lg btn-block" onClick={this.recommendActivities}>Recommend Activities</button>
       </div>
       </div>
       </div>
