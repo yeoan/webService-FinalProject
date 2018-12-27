@@ -36,7 +36,7 @@ class Sidebar extends React.Component {
                       <a href="tables.html"><i class="fa fa-table fa-fw"></i> Friends</a>
                   </li>
                   <li>
-                      <Link to="/calendar"><i class="fa fa-table fa-fw"></i> Calender</Link>
+                      <Link to="/calendar"><i class="fa fa-table fa-fw"></i> Calendar</Link>
                   </li>
               </ul>
           </div>

@@ -11,6 +11,7 @@ import UsaMap from './Maps/usa.js'
 import YourComponent2 from './your-component2.js'
 import { BrowserRouter, Route} from 'react-router-dom'; //{Link} to shift page;
 import Calendar from './Calendar/calendar.js'
+import UserProfile from './UserProfile/userprofile.js'
 import axios from 'axios';
 
 
@@ -56,6 +57,7 @@ class YourComponent extends React.Component {
           <Route path="/allactivities" component={Allactivities} />
           <Route path="/recommedActivity" component={RecommedActivity} />
           <Route path="/calendar" component={Calendar} />
+          <Route path="/userProfile" component={UserProfile} />
         </div>
         </div>
       </BrowserRouter>

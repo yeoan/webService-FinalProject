@@ -59,10 +59,10 @@ class RecommendActivities extends React.Component {
 
   addevents(date,activity){
     axios('http://127.0.0.1:3001/addEvents',{
-  method: "post",
-  data: {date:date,activity:activity},
-  withCredentials: true
-})
+      method: "post",
+      data: {date:date,activity:activity},
+      withCredentials: true
+    })
     .then(function (response) {
       console.log(response);
     })
