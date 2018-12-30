@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import {yourAction} from '../../actions/yourActions.js';
+import {connect} from 'react-redux';
 
 
 class CaliforniaMap extends React.Component {
@@ -12,8 +14,9 @@ class CaliforniaMap extends React.Component {
     var wind = [];
     var rain = [];
     //./california.json in nginx
-    axios.get('./california.json')
+    axios.get('http://api.openweathermap.org/data/2.5/forecast?APPID=a60c4651ab5b26e55713e77276e1db3d&id='+this.props.match.params.id)
   .then(function (response) {
+    console.log(response.data.list)
     response.data.list.map((item)=>{
       clouds.push({
         "label": counter.toString(),
@@ -27,16 +30,24 @@ class CaliforniaMap extends React.Component {
         "label": counter.toString(),
         "value": item.wind.speed
       })
-      rain.push({
-        "label": counter.toString(),
-        "value": item.rain["3h"]===undefined ? 0 : item.rain["3h"]
-      })
+      if(item.rain){
+        rain.push({
+          "label": counter.toString(),
+          "value": item.rain["3h"]===undefined ? 0 : item.rain["3h"]
+        })
+      }else{
+        rain.push({
+          "label": counter.toString(),
+          "value": 0
+        })
+      }
       counter = parseInt(counter + 3);
     });
     thisClass.renderCloudsCharts(clouds);
     thisClass.renderTempsCharts(temps);
     thisClass.renderWindCharts(wind);
     thisClass.renderRainCharts(rain)
+    thisClass.props.yourAction(response.data.list);
   })
   .catch(function (error) {
     // handle error
@@ -199,7 +210,7 @@ class CaliforniaMap extends React.Component {
           <div class="container-fluid">
               <div class="row">
       <div class="col-lg-12">
-          <h1 class="page-header">Weather</h1>
+          <h1 class="page-header">{this.props.match.params.city} Weather</h1>
       </div>
       <div class="col-lg-6">
       <div id="chart-container-clouds"></div>
@@ -221,4 +232,8 @@ class CaliforniaMap extends React.Component {
   }
 }
 
-export default CaliforniaMap;
+const mapStateToProps = state => ({
+  reduxProps: state.yourReducer.yourContent
+});
+
+export default connect(mapStateToProps, {yourAction})(CaliforniaMap);

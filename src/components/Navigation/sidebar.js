@@ -27,13 +27,10 @@ class Sidebar extends React.Component {
                               <Link to="/allactivities">All activities</Link>
                           </li>
                           <li>
-                              <a href="morris.html">Friend's activities</a>
+                              <a href="morris.html">My activities</a>
                           </li>
                       </ul>
 
-                  </li>
-                  <li>
-                      <a href="tables.html"><i class="fa fa-table fa-fw"></i> Friends</a>
                   </li>
                   <li>
                       <Link to="/calendar"><i class="fa fa-table fa-fw"></i> Calendar</Link>

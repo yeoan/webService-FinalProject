@@ -6,18 +6,146 @@ import axios from 'axios';
 
 class RecommendActivities extends React.Component {
 
+  componentWillMount(){
+    this.getRevents();
+  }
+
 
   constructor(props) {
     super(props);
     this.addevents = this.addevents.bind(this);
+    this.getRevents = this.getRevents.bind(this);
 
     this.state = {
-      Day1 : ['amusement park','badminton','basketball','bicycle','biking'],
-      Day2 : ['esport','fly a kite','get warm by stove','go to a hot spring'],
-      Day3 : ['have a picnic','hiking','hunting','jogging','play board game'],
-      Day4 : ['see a movie','shopping','sightseeing','skating','take a sunbath'],
-      Day5 : ['take a sunbath','visit a museum','volleyball']
+      Day1 : [],
+      Day2 : [],
+      Day3 : [],
+      Day4 : [],
+      Day5 : []
     }
+  }
+
+  getRevents(){
+    let component = this;
+    let good = ['basketball','bicycle','camping','have a picnic','hunting','roller skate','skating','take a sunbath']
+    let middle = ['badminton','bicycle','hiking','fly a kite','jogging','sightseeing','volleyball']
+    let middle2 = ['amusement park','go to a hot spring','play board game','see a movie']
+    let bad = ['couch potayo','programming','reading','shopping','visit a museum','esport']
+    axios('http://127.0.0.1:3001/getRevents',{
+      method: "post",
+      data: {weather: this.props.reduxProps},
+      withCredentials: true
+    })
+    .then(function (response) {
+      console.log(response);
+      response.data.result.map((item, index)=>{
+        switch(index) {
+          case 0:
+           if(item>100){
+             component.setState({
+               Day1: good
+             })
+           }else if(item<100&&item>20){
+             component.setState({
+               Day1: middle
+             })
+           }else if(item<20&&item> -20){
+             component.setState({
+               Day1: middle2
+             })
+           }else if(item<-20){
+             component.setState({
+               Day1: bad
+             })
+           }
+           break;
+          case 1:
+          if(item>100){
+            component.setState({
+              Day2: good
+            })
+          }else if(item<100&&item>20){
+            component.setState({
+              Day2: middle
+            })
+          }else if(item<20&&item> -20){
+            component.setState({
+              Day2: middle2
+            })
+          }else if(item<-20){
+            component.setState({
+              Day2: bad
+            })
+          }
+            break;
+          case 2:
+          if(item>100){
+            component.setState({
+              Day3: good
+            })
+          }else if(item<100&&item>20){
+            component.setState({
+              Day3: middle
+            })
+          }else if(item<20&&item> -20){
+            component.setState({
+              Day3: middle2
+            })
+          }else if(item<-20){
+            component.setState({
+              Day3: bad
+            })
+          }
+            break;
+          case 3:
+          if(item>100){
+            component.setState({
+              Day4: good
+            })
+          }else if(item<100&&item>20){
+            component.setState({
+              Day4: middle
+            })
+          }else if(item<20&&item> -20){
+            component.setState({
+              Day4: middle2
+            })
+          }else if(item<-20){
+            component.setState({
+              Day4: bad
+            })
+          }
+            break;
+          case 4:
+          if(item>100){
+            component.setState({
+              Day5: good
+            })
+          }else if(item<100&&item>20){
+            component.setState({
+              Day5: middle
+            })
+          }else if(item<20&&item> -20){
+            component.setState({
+              Day5: middle2
+            })
+          }else if(item<-20){
+            component.setState({
+              Day5: bad
+            })
+          }
+            break;
+          default:
+        }
+      })
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
+    .then(function () {
+
+      // always executed
+    });
   }
 
   removeEvent(List,activity,index){

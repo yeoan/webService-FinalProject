@@ -53,7 +53,7 @@ class YourComponent extends React.Component {
           <Route path="/" component={GlobalMap} exact/>
           <Route path="/northamerica" component={NorthAmericaMap} />
           <Route path="/usa" component={UsaMap} />
-          <Route path="/california" component={CaliforniaMap} />
+          <Route path="/usaStates/:city/:id" component={CaliforniaMap} />
           <Route path="/allactivities" component={Allactivities} />
           <Route path="/recommedActivity" component={RecommedActivity} />
           <Route path="/calendar" component={Calendar} />

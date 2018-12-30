@@ -1,7 +1,7 @@
 import {YOUR_TYPES}from '../actions/types';
 
 const initialState = {
-  yourContent: 0
+  yourContent: []
 };
 
 export default function yourReducer(state = initialState ,action) {
