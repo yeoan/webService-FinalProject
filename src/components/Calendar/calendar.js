@@ -3,6 +3,7 @@ import BigCalendar from 'react-big-calendar'
 import moment from "moment";
 import calendarStyle from './react-big-calendar.css'
 import axios from 'axios';
+import {connect} from 'react-redux';
 
 const localizer = BigCalendar.momentLocalizer(moment);
 class CalendarPage extends React.Component {
@@ -10,7 +11,7 @@ class CalendarPage extends React.Component {
   componentWillMount(){
     let component = this;
     let newArray = [];
-    axios('http://127.0.0.1:3001/getEvents',{
+    axios('http://yao.walsin.com:3001/getEvents?id='+component.props.id,{
       method: "get",
       withCredentials: true
     })
@@ -66,4 +67,9 @@ class CalendarPage extends React.Component {
   }
 }
 
-export default CalendarPage;
+const mapStateToProps = state => ({
+  id: state.yourReducer.uId,
+  email: state.yourReducer.email
+});
+
+export default connect(mapStateToProps, {})(CalendarPage);

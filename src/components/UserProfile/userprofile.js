@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './card.css';
 import axios from 'axios';
+import {connect} from 'react-redux';
 
 class UserProfile extends React.Component {
 
@@ -10,9 +11,13 @@ class UserProfile extends React.Component {
 
   getUserProfileData(){
     let component = this;
-    axios('http://127.0.0.1:3001/getUserProfile', {
-      method: 'post',
-      withCredentials: true
+    let formData = new FormData();
+    formData.append("email", this.props.email);
+    axios.post('http://yao.walsin.com:3001/getUserProfile', formData, {
+      withCredentials: true,
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
     })
     .then(function (response) {
       console.log(response);
@@ -61,7 +66,8 @@ class UserProfile extends React.Component {
     var formData = new FormData();
     var imagefile = document.querySelector('#file');
     formData.append("file", imagefile.files[0]);
-    axios.post('http://127.0.0.1:3001/upload', formData, {
+    formData.append("email", this.props.email);
+    axios.post('http://yao.walsin.com:3001/upload', formData, {
       withCredentials: true,
       headers: {
         'Content-Type': 'multipart/form-data'
@@ -87,7 +93,8 @@ class UserProfile extends React.Component {
     formData.append("username", usernameField.value);
     formData.append("address", addressField.value);
     formData.append("birthday", birthdayField.value);
-    axios.post('http://127.0.0.1:3001/editUserProfile', formData, {
+    formData.append("email", this.props.email);
+    axios.post('http://yao.walsin.com:3001/editUserProfile', formData, {
       withCredentials: true,
       headers: {
         'Content-Type': 'multipart/form-data'
@@ -109,7 +116,8 @@ class UserProfile extends React.Component {
     let img =document.getElementById('img')
     let formData = new FormData();
     formData.append("filename", this.state.image);
-    axios.post('http://127.0.0.1:3001/getImage', formData, {
+    formData.append("email", this.props.email);
+    axios.post('http://yao.walsin.com:3001/getImage', formData, {
       withCredentials: true,
       headers: {
         'Content-Type': 'multipart/form-data'
@@ -175,4 +183,9 @@ class UserProfile extends React.Component {
   }
 }
 
-export default UserProfile;
+const mapStateToProps = state => ({
+  id: state.yourReducer.uId,
+  email: state.yourReducer.email
+});
+
+export default connect(mapStateToProps, {})(UserProfile);

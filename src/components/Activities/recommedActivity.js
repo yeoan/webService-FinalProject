@@ -186,7 +186,7 @@ class RecommendActivities extends React.Component {
   }
 
   addevents(date,activity){
-    axios('http://127.0.0.1:3001/addEvents',{
+    axios('http://yao.walsin.com:3001/addEvents?id='+this.props.id,{
       method: "post",
       data: {date:date,activity:activity},
       withCredentials: true
@@ -319,7 +319,9 @@ class RecommendActivities extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  reduxProps: state.yourReducer.yourContent
+  reduxProps: state.yourReducer.yourContent,
+  id: state.yourReducer.uId,
+  email: state.yourReducer.email,
 });
 
 export default connect(mapStateToProps, {yourAction})(RecommendActivities);

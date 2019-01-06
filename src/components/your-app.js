@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {yourAction} from '../actions/yourActions.js';
+import {yourAction, setUid, setEmail} from '../actions/yourActions.js';
 import GlobalMap from './Maps/global.js';
 import Navigation from './Navigation/index.js';
 import NorthAmericaMap from './Maps/northamerica.js'
@@ -27,13 +27,18 @@ class YourComponent extends React.Component {
   }
 
   userCheck(){
-    axios.get('http://127.0.0.1:3001/usercheck', {withCredentials: true})
+    let component = this;
+    axios.get('http://yao.auth.com:3000/usercheck', {withCredentials: true})
       .then(function (response) {
         // handle success
         if(response.data.result=='error'){
-          window.location.href='http://127.0.0.1:3000/login'
+          window.location.href='http://yao.auth.com:3000/login'
+        }else{
+
         }
-        console.log(response);
+        component.props.setUid(response.data.id)
+        component.props.setEmail(response.data.email)
+        console.log(response.data);
       })
       .catch(function (error) {
         // handle error
@@ -69,4 +74,4 @@ const mapStateToProps = state => ({
   reduxProps: state.yourReducer.yourContent
 });
 
-export default connect(mapStateToProps, {yourAction})(YourComponent);
+export default connect(mapStateToProps, {yourAction, setUid, setEmail})(YourComponent);
